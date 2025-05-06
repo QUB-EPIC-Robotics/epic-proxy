@@ -1,0 +1,17 @@
+name = "GitHub"
+description = """
+Used to redirect SSH traffic to github.com via localhost. This requires a
+tunnel from github.com to the GitHub host to be open.
+
+This can be achieved using the RemoteForward option in ssh_config(5).
+"""
+enable_command = """
+echo -e \
+"Host github.com\n    HostName $GITHUB__HOST\n    Port $GITHUB__PORT\n" \
+| sudo tee -a /etc/ssh/ssh_config.d/epic-proxy.conf > /dev/null
+"""
+disable_command = """
+sed -i "/^Host github.com$/d;/^    HostName $GITHUB__HOST$/d; \
+/^    Port $GITHUB__PORT$/d" /etc/ssh/ssh_config.d/epic-proxy.conf
+"""
+

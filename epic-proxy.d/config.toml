@@ -1,0 +1,10 @@
+[http]
+url = "http://example.net:80/"
+
+[ntp]
+host = "example.net"
+
+[github]
+host = "example.net"
+port = 22
+

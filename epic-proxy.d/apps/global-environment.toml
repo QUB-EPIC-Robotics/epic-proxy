@@ -1,0 +1,21 @@
+name = "Global Environment"
+description = """
+Sets the proxy environment variables for the epic-lab proxy in the
+/etc/environment file.
+
+These environment vairables are used by various applications including (but not
+limited to) apt, snap, wget and curl.
+"""
+enable_command = """
+echo "export http_proxy=$HTTP__URL" >> /etc/environment
+echo "export https_proxy=$HTTP__URL" >> /etc/environment
+echo "export HTTP_PROXY=$HTTP__URL" >> /etc/environment
+echo "export HTTPS_PROXY=$HTTP__URL" >> /etc/environment
+"""
+disable_command = """
+sed -i '/http_proxy/d' /etc/environment
+sed -i '/https_proxy/d' /etc/environment
+sed -i '/HTTP_PROXY/d' /etc/environment
+sed -i '/HTTPS_PROXY/d' /etc/environment
+"""
+

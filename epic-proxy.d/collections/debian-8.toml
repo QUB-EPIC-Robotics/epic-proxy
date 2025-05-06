@@ -1,0 +1,6 @@
+name = "Debian 8 (Jessie)"
+description = """
+Proxy settings for the base Debian 8 image.
+"""
+apps = ["github", "global-environment", "systemd-timesyncd"]
+

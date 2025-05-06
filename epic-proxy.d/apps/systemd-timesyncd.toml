@@ -1,0 +1,17 @@
+name = "sytemd-timesyncd"
+description = """
+Sets the proxy settings for systemd-timesyncd globally.
+
+systemd-timesyncd is the service that synchronises the system clock. Wihout an
+accurate system clock various applications will fail e.g. HTTPS which may
+prevent package installs.
+"""
+enable_command = """
+sed -i "s|^#NTP=.*|NTP=$NTP__HOST|" /etc/systemd/timesyncd.conf
+systemctl restart systemd-timesyncd
+"""
+disable_command = """
+sed -i "s|^NTP=.*|#NTP=|" /etc/systemd/timesyncd.conf
+systemctl restart systemd-timesyncd
+"""
+
