@@ -30,4 +30,5 @@ jobs:
       continue-on-error: true
 
     - name: Global environment
-      run: sudo bash -x ./tests/apps/global-environment.sh
+      run: sudo bash -x ./tests/run-tests.sh
+
