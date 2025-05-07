@@ -17,6 +17,17 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Global Environment
+    - name: Print current file states
       run: |
-        sudo bash -x ./tests/apps/global-environment.sh
+        echo Listing /etc/environment...
+        ls -lah /etc/environment
+        cat /etc/environment
+        echo Listing /etc/ssh/ssh_config.d/...
+        ls -lah /etc/ssh/ssh_config.d
+        echo Listing /etc/systemd/timesyncd.conf...
+        ls -lah /etc/systemd/timesyncd.conf
+        cat /etc/systemd/timesyncd.conf
+      continue-on-error: true
+
+    - name: Global environment
+      run: sudo bash -x ./tests/apps/global-environment.sh
