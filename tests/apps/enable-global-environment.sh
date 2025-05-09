@@ -1,6 +1,9 @@
 #!/bin/bash
 
 
+# App name
+APP_NAME="global-environment"
+
 # Target file to check
 TARGET_FILE="/etc/environment"
 
