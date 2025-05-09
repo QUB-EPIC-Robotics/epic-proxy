@@ -1,4 +1,4 @@
-name: CI
+name: Test
 
 # Controls when the workflow will run
 on:
@@ -14,8 +14,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
+    - name: Checkout
       uses: actions/checkout@v4
+
+    - name: Run tests
+      run: sudo bash -x ./tests/run-tests.sh
+      continue-on-error: true
 
     - name: Print current file states
       run: |
@@ -29,6 +33,11 @@ jobs:
         cat /etc/systemd/timesyncd.conf
       continue-on-error: true
 
-    - name: Global environment
-      run: sudo bash -x ./tests/run-tests.sh
+    - name: Test report
+      uses: dorny/test-reporter@v2
+      if: success() || failure()
+      with:
+        name: Test Results
+        path: tests/report.json
+        reporter: mocha-json
 
