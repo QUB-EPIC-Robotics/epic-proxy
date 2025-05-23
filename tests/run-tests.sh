@@ -178,15 +178,17 @@ EOL
     fi
 done
 
-# Close the JSON structure
+# Add pending array
+cat >> "$REPORT_FILE" << EOL
+  ],
+  "pending": []
+}
+EOL
+
+# Calculate final values
 end_time=$(date +%s000)
 end_date=$(date -u +"%Y-%m-%dT%H:%M:%S.%3NZ")
 duration=$((end_time - start_time))
-
-cat >> "$REPORT_FILE" << EOL
-  ]
-}
-EOL
 
 # Update stats using sed
 sed -i "s/\"tests\": 0/\"tests\": $total_tests/" "$REPORT_FILE"
